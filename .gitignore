@@ -1,0 +1,21 @@
+# EPLAN Education project files — non-portable, license-restricted, NOT shared
+*.elk
+*.zw1
+*.zw2
+*.edb
+*.epl
+*.efc
+*.elr
+*.elx
+Backup/
+*.bak
+*.tmp
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# IDE (even though EPLAN is not IDE, spare)
+.vscode/
+.idea/

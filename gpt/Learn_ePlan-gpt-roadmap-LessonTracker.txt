@@ -1,0 +1,496 @@
+================================================================================
+EPLAN ONE-WEEK CRASH — LESSON TRACKER
+================================================================================
+Dummy project : DOL motor starter panel (industry-standard reference)
+Purpose       : Recognition-level EPLAN fluency in 7 days; productive from
+                day 1 at Hortiworld, not expert.
+Tool          : EPLAN Education (student). 40-page cap. Non-portable files.
+                Personal practice ONLY — never production at Hortiworld.
+Format        : Mirrors your design/dev trackers. One subsec at a time.
+                Per subsec I (assistant) will:
+                  (1) explain concept
+                  (2) step-by-step how to do it
+                  (3) state evidence to send back
+                  (4) on pass, write a conclusion, tick [x], proceed.
+Repo/naming   : Files saved under your usual workspace. No code artefacts.
+
+HOW TO USE
+----------
+- Work top to bottom. Day boundaries are soft; hours are evenings/weekends.
+- Tick [x] only after your evidence passes my check.
+- If a subsec blocks you, work the Debug lines before advancing.
+- One chat, continuous. Paste evidence back into this chat.
+- Do NOT attempt Section 6+ before Sections 2-4 are ticked — the mental
+  model must be right before potential trackers make sense.
+
+LEGEND
+------
+[ ]  not started
+[~]  in progress
+[x]  done + verified
+
+TYPE MARKERS
+------------
+  Type: lesson     I explain the concept; you listen, then attempt
+  Type: exercise   you perform it in EPLAN Education
+  Type: verify     you report back; I check and tick
+  Type: self-check you sanity-test against expected result
+  Type: writing    short writeup to consolidate learning
+
+SCOPE (HONEST)
+--------------
+Target after 7 days:
+  - recognise the EPLAN interface and every ribbon tab by name
+  - understand & apply IEC 81346 tags (=loc+fn-prod)
+  - draw a 1-page DOL power circuit
+  - draw a control circuit with cross-references working
+  - model a PLC input card with terminal strip
+  - place potential trackers and split power distribution over 2 pages
+  - recognise what Pro Panel, macros, Data Portal, auto-BOM do — and why
+    to ignore them for now.
+Not target:
+  - fluency, macros, EPLAN Pro Panel, EPLAN Fluid, multi-user, project
+    data management, script-based automation, full IEC 81346 depth beyond
+    what Hortiworld panels use.
+
+================================================================================
+SECTION 0 — SETUP & ORIENTATION (Day 1, ~2 h)
+================================================================================
+
+[ ] 0.1  INSTALL & LAUNCH EPLAN EDUCATION
+    Type: exercise
+    Objective: working install, correct license, project wizard reachable.
+    Action: verify Education edition launches; note version (v2022/v2023/v2024);
+            open File > New Project wizard and stop at template selection.
+    Evidence: version number, screenshot description of wizard, one line on
+              which template list you see.
+    Verify: Education license shown; wizard reaches template chooser.
+    Debug:  license error -> re-activate via EPLAN License Client; don't
+            proceed until resolved.
+
+[ ] 0.2  RIBBON TOUR (recognition only)
+    Type: lesson + self-check
+    Objective: name all tabs and what they are for.
+    Feature: Ribbon tabs — Start, Project, Page, Devices, Insert, Edit,
+             View, Utilities, Options, Help.
+    Action: I walk you through each tab's purpose; you open each and name
+            one button under it.
+    Evidence: your list of 10 tabs + 1 button each.
+    Verify: all 10 named with a plausible button; 8+ correct.
+    Debug:  confusing two tabs -> note it; do not dwell.
+
+[ ] 0.3  WINDOW PANES ORIENTATION
+    Type: lesson + self-check
+    Feature: Page Navigator, Device Navigator, Graphic Editor, Messages,
+             Layers, Properties.
+    Action: dock/undock Page Navigator; open a demo template project's
+            first page.
+    Evidence: describe which pane is where after docking; describe how
+              messages pane reports "0 errors".
+    Verify: you can articulate Page Navigator vs Device Navigator.
+    Debug:  never close Graphic Editor by accident — note how to reopen
+            (View > Graphic Editor).
+
+[ ] 0.4  TERMINOLOGY BASELINE
+    Type: lesson
+    Objective: fix the vocabulary before touching the tool.
+    Action: I define: project, page, page macro, function, symbol,
+            symbol library, device, part, connection, potential, plot
+            frame, title block. You paraphrase each in one line.
+    Evidence: your paraphrases (10 lines).
+    Verify: ≥8/10 correct.
+    Debug:  symbol vs function confusion -> revisit before 0.3 next session.
+
+================================================================================
+SECTION 1 — PROJECT CREATION & STRUCTURE (Day 1-2, ~2 h)
+================================================================================
+
+[ ] 1.1  CREATE THE DUMMY PROJECT
+    Type: exercise
+    Objective: create a project named "DOL_Starter_Training" from the
+               IEC template.
+    Feature: Project wizard > template IEC_tpl001 or equivalent.
+    Action: choose IEC template, location on disk, structure identifiers
+            default; finish wizard; open project.
+    Evidence: project name, template name, page tree structure shown.
+    Verify: project opens with default pages; structure identifiers visible.
+    Debug:  template missing -> use closest IEC baseline template; note
+            which template you used.
+
+[ ] 1.2  PAGE NAVIGATOR & STRUCTURE IDENTIFIERS
+    Type: lesson + exercise
+    Objective: understand "=" (location), "+" (function), and default
+               structure like =EB1+EAA1.
+    Feature: Page Navigator; structure identifier field.
+    Action: create three new pages under the project:
+              Page 1: =GH1+CP1  (control panel, main power)  -- schematic multi-line
+              Page 2: =GH1+CP1  (control circuit)             -- schematic multi-line
+              Page 3: =GH1+CP1  (terminal diagram preview)   -- terminal diagram (skip if Education blocks)
+    Evidence: page tree with the three pages; each page's structure field.
+    Verify: 81346 form correct; three pages created.
+    Debug:  page type dropdown wrong -> fix before Section 3.
+
+[ ] 1.3  TITLE BLOCK & PROJECT PROPERTIES
+    Type: exercise
+    Objective: fill project properties (customer, project no., date,
+               responsible engineer) and confirm title block updates on
+               every page.
+    Feature: Project > Properties; Title Block.
+    Action: fill 5 fields; verify they appear on every page bottom-right.
+    Evidence: describe two fields you filled and where they appear.
+    Verify: title block reflects project properties on all 3 pages.
+    Debug:  only one page updates -> page uses different title block;
+            unify template.
+
+================================================================================
+SECTION 2 — IEC 81346 DEVICE TAGGING (Day 2, ~2 h)  [PRIORITY CONCEPT 1]
+================================================================================
+
+[ ] 2.1  CONCEPT LESSON
+    Type: lesson
+    Objective: explain =Location+Function-Product; contrast with KiCAD
+               reference designators (R1, C2) which have no location.
+    Feature: none (concept).
+    Action: I explain:
+              =  location (system/plant)          e.g. =GH1 (greenhouse 1)
+              +  function (subsystem/panel)        e.g. +CP1 (control panel 1)
+              -  product (device in the function)  e.g. -K3 (contactor 3)
+              letter codes per IEC 81346 / EN 61346-2: K=contactor,
+              Q=MCB, F=protective, M=motor, X=terminal, S=switch, H=lamp
+    Evidence: you translate these 5 English identifiers to 81346 form:
+              (a) 3rd contactor in control panel 1, greenhouse 1
+              (b) motor 1 in machine room 2
+              (c) main circuit breaker in panel 2, line 1
+              (d) emergency-stop pushbutton in panel 1
+              (e) terminal strip in panel 1
+    Verify: 5/5 correct format.
+    Debug:  you put product before function -> wrong; location=function-product.
+
+[ ] 2.2  APPLY IN EPLAN
+    Type: exercise
+    Objective: insert a contactor and see EPLAN auto-tag it from the
+               page's location+function.
+    Feature: Insert > Symbol > IEC_symbol library > contactor coil; the
+             full DT field shows =GH1+CP1-K1.
+    Action: place a contactor coil on Page 1; open its Properties; find
+            the full device tag field.
+    Evidence: paste the full device tag shown; describe where the fields
+              =GH1, +CP1, -K1 sit separately.
+    Verify: full tag matches Section 2.1 rules.
+    Debug:  only shows -K1 -> page has no structure identifier; go back 1.2.
+
+[ ] 2.3  RENAME / RENUMBER
+    Type: exercise
+    Objective: renumber a device and observe automatic update of its
+               cross-references.
+    Feature: right-click device > Properties > Device tag; or Utilities >
+             Renumber.
+    Action: change -K1 to -K3; save.
+    Evidence: describe what changed and whether any cross-reference
+              jumped to -K3 automatically.
+    Verify: all references updated; no orphan.
+    Debug:  unchanged references -> device was copied as "graphic" not
+            "device"; delete and re-insert as device.
+
+================================================================================
+SECTION 3 — SINGLE-PAGE DOL POWER CIRCUIT (Day 3, ~3 h)
+================================================================================
+
+[ ] 3.1  LAYOUT PLAN
+    Type: lesson
+    Objective: plan the page before drawing (potentials left, control
+               right, motor downstream).
+    Action: I describe the standard DOL layout:
+              top: L1 L2 L3 PE potential rail (or 3-line busbar)
+              down: Q1 (MCB) -> K1 (contactor) -> F1 (thermal overload)
+              -> M1 (3-phase motor) with PE.
+    Evidence: your one-line mental sketch described in text.
+    Verify: sequence is electrically correct.
+    Debug:  overload after motor -> wrong; overload is in series before
+            motor (or contactor-mounted).
+
+[ ] 3.2  INSERT POWER SYMBOLS
+    Type: exercise
+    Objective: insert Q1, K1 main contacts, F1, M1.
+    Feature: Insert > Symbol; IEC library; search by symbol name.
+    Action: place each symbol; assign device tags Q1, K1, F1, M1.
+    Evidence: list of placed symbols with device tags.
+    Verify: 4 device groups present; K1 is a multi-pole contactor, not
+            a single contact.
+    Debug:  cannot find F1 thermal overload -> use IEC library "overload
+            relay" symbol; assign F1.
+
+[ ] 3.3  WIRING (autoconnect & T-nodes)
+    Type: exercise
+    Objective: connect the power circuit; EPLAN auto-generates connection
+               lines when symbols align on the same grid.
+    Feature: Autoconnect lines; T-node; break point if crossing.
+    Action: wire L1-L2-L3 top to Q1, Q1 to K1, K1 to F1, F1 to M1.
+            Add PE line to motor frame.
+    Evidence: describe which wires EPLAN auto-drew vs which you manually
+              drew; count of connections.
+    Verify: 4 horizontal potentials + PE, no missed junction, no crossing
+            without break point.
+    Debug:  auto-connect not drawn -> symbols not on the same grid Y
+            coordinate; toggle grid to 4 mm and re-align.
+
+[ ] 3.4  CONNECTION POINT NUMBERS & WIRE NUMBERS
+    Type: exercise
+    Objective: put wire numbers on connections (for panel build).
+    Feature: Utilities > Number connections; or per-connection properties.
+    Action: number wires 1..n; describe the numbering rule EPLAN applied.
+    Evidence: 3 example wire numbers; describe default rule.
+    Verify: numbering covers all power wires; no duplicates.
+    Debug:  nothing numbered -> project settings block auto-numbering;
+            enable in Options > Settings > Projects > Connections.
+
+[ ] 3.5  SELF-CHECK & WRITEUP
+    Type: self-check + writing
+    Objective: verify a colleague could build this from your page.
+    Action: print-preview Page 1; check IEC symbols, tags, wire numbers.
+    Evidence: 3-sentence writeup — what is on the page, what would trip
+              up a panel builder, what you are unsure of.
+    Verify: writeup identifies at least one real ambiguity.
+    Debug:  no ambiguity found -> look again at PE routing and overload
+            placement.
+
+================================================================================
+SECTION 4 — CONTROL CIRCUIT & CROSS-REFERENCES (Day 4, ~3 h)
+                                            [PRIORITY CONCEPT 3]
+================================================================================
+
+[ ] 4.1  CONCEPT LESSON — CROSS-REFERENCE
+    Type: lesson
+    Objective: explain how EPLAN auto-generates "coil ↔ aux contact"
+               references and why KiCAD net-labels do NOT do this.
+    Action: I explain:
+              - a device is one object with many representations
+              - K1 has a coil on Page 2, an NO aux contact on Page 2,
+                a main contact on Page 1 — all share -K1
+              - EPLAN writes "/2.3" style references automatically
+    Evidence: paraphrase why KiCAD cannot replicate this.
+    Verify: answer captures "device is logical, not graphical".
+    Debug:  "net labels do the same" -> no; net labels link nets, not
+            devices; contactor aux feedback is a device concept.
+
+[ ] 4.2  CONTROL CIRCUIT LAYOUT
+    Type: lesson
+    Objective: plan 230 V AC control circuit with E-stop, start, stop,
+               seal-in, contactor coil, overload NC.
+    Action: I lay out the standard ladder:
+              L (230 V) -> F2 (control fuse) -> S0 (E-stop NC)
+              -> S1 (stop NC) -> S2 (start NO) || K1.13-14 (seal-in)
+              -> F1.95-96 (overload NC) -> K1 coil (A1/A2) -> N
+    Evidence: your textual ladder confirmation.
+    Verify: sequence electrically correct.
+    Debug:  seal-in across S2 only -> wrong; seal-in across S2 (parallel).
+
+[ ] 4.3  DRAW & TAG
+    Type: exercise
+    Objective: place symbols on Page 2 (control circuit), tag -S0, -S1,
+               -S2, -K1 (coil+aux), -F1 (aux NC), -F2.
+    Evidence: list of placed devices with tags.
+    Verify: K1 appears as coil + aux on Page 2, main on Page 1, same tag.
+    Debug:  K1 aux not recognised as same device -> inserted as new
+            device; delete and use Insert > Device (not Insert > Symbol).
+
+[ ] 4.4  VERIFY AUTO CROSS-REFERENCES
+    Type: self-check
+    Objective: confirm "/1.x" reference appears at K1 coil pointing to
+               the main contact on Page 1, and vice versa.
+    Evidence: paste one reference string (e.g. "/1.3") and where you see it.
+    Verify: bidirectional references present.
+    Debug:  no reference -> Options > Settings > Cross-references
+            display disabled; enable.
+
+[ ] 4.5  PLC-ISH VARIANT — OPTIONAL IF TIME
+    Type: exercise (optional)
+    Objective: replace S1/S2 with a Mitsubishi-style PLC input later;
+               skip if behind schedule.
+    Evidence: skip or one-line "not done, deferred to Section 5".
+
+================================================================================
+SECTION 5 — TERMINAL STRIP & PLC I/O MAPPING (Day 5, ~3 h)
+                                            [PRIORITY CONCEPT 2]
+================================================================================
+
+[ ] 5.1  CONCEPT LESSON — PLC I/O IN EPLAN
+    Type: lesson
+    Objective: explain how a Mitsubishi FX/Q input card appears in EPLAN:
+               a "PLC box" function with I/O addresses (X0..X7, Y0..Y7)
+               and channel-level connection points.
+    Action: I explain:
+              - Mitsubishi input addressing: X (input), Y (output), octal
+                grouping (X0..X7, X10..X17 etc.)
+              - EPLAN PLC box = a function with a PLC-specific connection
+                point pattern
+              - each X-point becomes a connection point number on the
+                symbol; the field is editable (X0, X1, ...)
+    Evidence: paraphrase X vs Y and octal grouping.
+    Verify: correct.
+    Debug:  "hex grouping" -> wrong; Mitsubishi is octal.
+
+[ ] 5.2  PLC BOX — 8 PNP SENSORS
+    Type: exercise
+    Objective: model a single input card with 8 PNP 24 V DC sensors.
+    Feature: Insert > Symbol > PLC > PLC box (8-channel), IEC library.
+    Action: place PLC box on a new page under =GH1+CP1; assign device tag
+            -A1 (or Mitsubishi-style -A1); set 8 inputs to X0..X7; add
+            8 sensor symbols upstream, tags -B1..-B8.
+    Evidence: pasted list of 8 PLC address + sensor tag pairs.
+    Verify: 8 pairs; addresses octal-correct (X0..X7 is fine).
+    Debug:  can't edit X-address -> connection point properties, not
+            device tag; open per-Pin properties.
+
+[ ] 5.3  TERMINAL STRIP
+    Type: exercise
+    Objective: insert -X1 terminal strip between field sensors and PLC
+               input card, matching a real cabinet.
+    Feature: Insert > Terminal; Terminal strip editor.
+    Action: create X1 with at least 6 terminals (24V, 0V, X0, X1, X2,
+            PE); assign each terminal to a wire side.
+    Evidence: terminal list with numbers and net names.
+    Verify: each sensor wire passes through a terminal; +24 V and 0 V
+            buses present.
+    Debug:  terminal floating -> attach to a connection line; EPLAN
+            requires the terminal on the wire, not next to it.
+
+[ ] 5.4  PNP WIRING CHECK
+    Type: self-check
+    Objective: confirm 3-wire PNP topology (brown=+24, blue=0V, black=
+               signal to X input).
+    Action: describe the wiring for one sensor.
+    Evidence: 3-line description.
+    Verify: PNP topologically correct.
+    Debug:  black to 0V -> NPN not PNP.
+
+================================================================================
+SECTION 6 — POTENTIAL TRACKERS & MULTI-PAGE DISTRIBUTION
+                                        (Day 6, ~3 h)  [PRIORITY CONCEPT 4]
+================================================================================
+
+[ ] 6.1  CONCEPT LESSON
+    Type: lesson
+    Objective: explain potentials (L1, L2, L3, N, PE, +24V, 0V, and any
+               "control 230V") and potential trackers as cross-page
+               buses.
+    Action: I explain:
+              - potentials persist across sheets
+              - potential tracker symbol = "this net continues on Page N"
+              - distinguishes electrical continuity from wire number
+    Evidence: paraphrase difference between wire number and potential.
+    Verify: captured.
+    Debug:  "potential = voltage" -> potential is an identified net at a
+            defined voltage; many potentials can exist at 24 V.
+
+[ ] 6.2  POWER DISTRIBUTION LAYOUT (2 pages)
+    Type: lesson
+    Objective: plan 400 V 3-ph -> 230 V 1-ph (via transformer) -> 24 V DC
+               (via PSU) over Pages 1 and 2.
+    Action: I describe the tree:
+              Page 1 top: L1/L2/L3/PE incoming
+              Page 1: Q0 main switch -> T1 transformer -> 230 V
+              Page 1: Q2 MCB -> V1 PSU -> +24V / 0V
+              Page 2 top: +24V / 0V potential rail, drawn as tracker
+    Evidence: your textual tree.
+    Verify: correct voltage flow.
+    Debug:  missing isolation -> transformer output must be re-protected
+            (Q2) before PSU.
+
+[ ] 6.3  PLACE TRACKERS
+    Type: exercise
+    Objective: place potential trackers for L1/L2/L3/PE, 230 V, +24 V,
+               0 V at page boundaries.
+    Feature: Insert > Potential tracker (or "Interruption point" symbol).
+    Action: place one tracker per potential on Page 1 bottom; place
+            matching tracker on Page 2 top; verify EPLAN flags the link.
+    Evidence: list of potentials and whether each shows a matched pair.
+    Verify: all show green / no "unconnected" warning.
+    Debug:  "unconnected" -> mismatched potential names; case and space
+            matter.
+
+[ ] 6.4  FULL PROJECT PRINT CHECK
+    Type: self-check
+    Objective: every page shows its trackers; nothing floats.
+    Action: print preview all pages.
+    Evidence: describe any tracker shown in red / warning state.
+    Verify: 0 warnings.
+    Debug:  warning persists -> tracker on a page with wrong structure
+            identifier; move to correct =GH1+CP1.
+
+================================================================================
+SECTION 7 — CONSOLIDATION, WHAT-TO-IGNORE, WORK TIPS (Day 7, ~2 h)
+================================================================================
+
+[ ] 7.1  PROJECT SELF-AUDIT
+    Type: self-check
+    Objective: your DOL project passes a "would this be buildable?" test.
+    Checklist (yes/no for each):
+      [ ] power circuit correct
+      [ ] control circuit correct with seal-in
+      [ ] E-stop in series, NC, not bridged
+      [ ] overload NC in coil circuit
+      [ ] all device tags are =loc+fn-prod form
+      [ ] cross-references present on all multi-page devices
+      [ ] terminal strip X1 present and numbered
+      [ ] PLC X-addresses mapped to terminals
+      [ ] potential trackers show no warnings
+      [ ] title block filled
+    Evidence: yes/no list.
+    Verify: 8/10 yes; note the 2 no's as known gaps.
+    Debug:  any "no" in first 5 -> re-do relevant section this week if
+            hours remain; else document as gap.
+
+[ ] 7.2  WHAT TO IGNORE (this week)
+    Type: lesson
+    Objective: close out temptation list.
+    Features to ignore:
+      - EPLAN Pro Panel (3D cabinet layout)
+      - EPLAN Data Portal (cloud parts)
+      - Macros & variant management
+      - Automatic BOM / report generation beyond "peek"
+      - Multi-user / EPLAN eVIEW
+      - Scripting, API, EPLAN API
+      - Full IEC 81346 depth (DIN 40719 legacy, function hierarchies
+        beyond =+ -)
+    Evidence: your one-line confirmation of what you will NOT do.
+    Verify: acknowledged.
+
+[ ] 7.3  FIRST-WEEK-AT-HORTIWORLD PLAYBOOK
+    Type: writing
+    Objective: how to look prepared, ask well.
+    Action: I hand you:
+      - one sentence you can say on day 1: "I've built a DOL starter
+        panel in EPLAN Education — I'm confident in tags, cross-refs,
+        terminals and potential trackers. I haven't used EPLAN in
+        production or Pro Panel."
+      - how to ask: "Can you show me how you handle X in this project?
+        I know the concept, I want to see the house convention."
+      - never say: "I've never used EPLAN." Say: "I've done EPLAN
+        Education; I'm ready to learn the house standard."
+    Evidence: you paraphrase your day-1 line and your question template.
+    Verify: credible, honest, competent-sounding.
+    Debug:  sounds apologetic -> tighten.
+
+[ ] 7.4  FINAL WRITEUP
+    Type: writing
+    Objective: 5-line summary of what you now know, what you still don't,
+               next learning target.
+    Evidence: the 5 lines.
+    Verify: one line per bullet, honest.
+    Debug:  none — this is your artefact.
+
+================================================================================
+KEY REMINDERS (keep visible)
+================================================================================
+- One subsec at a time. No skipping ahead.
+- EPLAN Education files are personal training only; never production.
+- Flag KiCAD-vs-EPLAN mental-model mismatches wherever you feel one
+  forming — I'll correct before the model sets.
+- If a day falls behind schedule, drop Section 6 first (trackers are
+  recognition-level), not Sections 2-4 (daily-use concepts).
+- Your goal after 7 days is: follow a colleague's explanation without
+  being lost. Not fluency. Not expert. Conversant.
+================================================================================
+END OF LESSON TRACKER
+================================================================================
