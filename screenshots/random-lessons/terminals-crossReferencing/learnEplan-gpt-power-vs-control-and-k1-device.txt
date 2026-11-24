@@ -1,0 +1,74 @@
+================================================================================
+NOTES — POWER VS. CONTROL & WHAT "K1" REALLY IS
+File     : gpt/notes/learnEplan-gpt-power-vs-control-and-k1-device.txt
+Section  : Concept Clarification (Circuit Logic)
+Date     : 2026-11-24
+================================================================================
+
+1. THE JOURNEY OF CURRENT: POWER VS. CONTROL
+--------------------------------------------------------------------------------
+You are confusing the Main Power Circuit (Page 4) with the Control Circuit 
+(Page 5). They are two separate electrical loops.
+
+- Page 4 (Power): This is the heavy-duty 400V loop. R, Y, B go through the 
+  heavy metal contacts of K1, through the heating elements of the OLR, and 
+  into the motor.
+- Page 5 (Control): This is the low-power loop (usually 230V or 24V). It is 
+  tapped off one phase (R) and Neutral (N). It does NOT go to the motor. It 
+  goes only to the coils, buttons, and sensors.
+
+When I said "Power flows from R through OLR...", I meant *control power*. 
+The OLR symbol on Page 5 is not the main heating element; it is the small 
+auxiliary NC switch built into the side of the OLR. If the main OLR heats up 
+and trips, this little switch opens, killing the control circuit and dropping 
+K1.
+
+2. TRACING THE CONTROL CIRCUIT (PAGE 5)
+--------------------------------------------------------------------------------
+Let's trace the exact path from R to N on Page 5:
+
+1. Current enters from R.
+2. Passes through the OLR auxiliary NC contact. (Closed during normal running).
+3. Passes through the STOP button (NC). (Closed unless pressed).
+4. Arrives at a T-junction. The current is now waiting.
+5. Pressing the START button (NO) allows current to flow to the K1 coil.
+6. The K1 coil energizes (A1 to A2), connecting to N, completing the circuit.
+7. Because K1 is energized, its main contacts on Page 4 close (motor spins).
+8. Because K1 is energized, its 13-14 NO contact on Page 5 closes.
+9. You release the START button. The current now bypasses the START button 
+   and flows through the K1 13-14 contact to keep the coil energized. This 
+   is called a "Seal-in" or "Self-holding" circuit.
+
+3. HOW CAN "K1" BE A 3-PHASE SWITCH, A COIL, AND A 1-PHASE SWITCH?
+--------------------------------------------------------------------------------
+No, "K1" is not a voltage node. 
+"K1" is a PHYSICAL DEVICE. It is a single, physical block of plastic and 
+copper sitting in the control cabinet (a Contactor).
+
+Imagine holding a real contactor in your hand. It has:
+- A big 3-phase block on the bottom for the motor (drawn on Page 4).
+- A small coil on top to turn it on (drawn on Page 5).
+- Small auxiliary switches on the front (drawn on Page 5).
+
+In EPLAN, you are drawing the *wiring* of this physical device. 
+Because the software needs to know that the 3-phase switch on Page 4, the 
+coil on Page 5, and the 1-phase switch on Page 5 are all physically the same 
+piece of plastic, you give them all the EXACT SAME name: -K1.
+
+If you gave them different names, EPLAN would think you have three separate 
+devices in the cabinet. By sharing the name -K1, EPLAN links them together. 
+When the coil gets power on Page 5, EPLAN knows the main contacts on Page 4 
+close.
+
+4. THE INTERLOCKING MECHANISM (PUTTING IT TOGETHER)
+--------------------------------------------------------------------------------
+Look at the branches below the START button:
+- In series with the STAR coil, there is an NC contact of DELTA.
+- In series with the DELTA coil, there is an NC contact of STAR.
+
+When the STAR coil is energized, the STAR NC contact opens. This physically 
+cuts the wire before the DELTA coil can get power. This is how the hardware 
+guarantees they never turn on at the same time, preventing a dead short 
+circuit on Page 4.
+================================================================================
+END OF NOTES

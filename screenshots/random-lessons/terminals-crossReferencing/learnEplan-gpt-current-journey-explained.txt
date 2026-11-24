@@ -1,0 +1,82 @@
+================================================================================
+NOTES — THE PHYSICAL JOURNEY OF CURRENT (POWER VS. CONTROL)
+File     : gpt/notes/learnEplan-gpt-current-journey-explained.txt
+Section  : Concept Clarification (Circuit Logic)
+Date     : 2026-11-24
+================================================================================
+
+1. THE ANALOGY: MUSCLE VS. BRAIN
+--------------------------------------------------------------------------------
+To understand this, stop looking at the drawings as "one big circuit" and 
+start looking at them as two separate, isolated loops that interact through 
+a magnet.
+
+- PAGE 4 (Power Circuit): The Muscle. It uses 400V. It is designed to move 
+  the motor. The current here is massive and dangerous.
+- PAGE 5 (Control Circuit): The Brain. It uses 230V or 24V. It is designed 
+  to make decisions (push buttons, sensors) and send a signal. The current 
+  here is tiny.
+
+The current does NOT flow from Page 5 into the motor on Page 4. Instead, the 
+current on Page 5 acts as a "remote trigger" to turn the big muscle on and 
+off.
+
+2. JOURNEY OF CURRENT: PAGE 4 (THE MUSCLE)
+--------------------------------------------------------------------------------
+Look at your Page 4 drawing:
+1. 400V enters through R, Y, B.
+2. The current stops at the MCB (Circuit Breaker). It is waiting.
+3. The current stops at K1 (Main Contactor). K1 is an open switch. No 
+   current can pass.
+4. The motor is dead.
+
+THE TRIGGER: The ONLY way the 400V current can move on Page 4 is if K1 closes 
+its main contacts. But K1 is a dumb piece of metal; it only closes if 
+electricity is applied to its coil. Where is the coil? On Page 5.
+
+3. JOURNEY OF CURRENT: PAGE 5 (THE BRAIN)
+--------------------------------------------------------------------------------
+Look at your Page 5 drawing:
+1. A small control wire taps into Phase R. (It usually goes through a 
+   transformer or power supply first to step it down to 230V or 24V, but the 
+   logic is the same).
+2. The current flows through the OLR auxiliary NC contact. If the motor is 
+   cold and healthy, this is closed. Current passes.
+3. The current flows through the STOP button. It is NC (Normally Closed), so 
+   current passes.
+4. The current arrives at the START button. It is NO (Normally Open). It is a 
+   dead end. The circuit is broken here.
+5. Everything is resting. The current is waiting.
+
+THE ACTION: A human presses the START button.
+6. The START button closes. Current rushes through.
+7. The current flows into the K1 Coil (A1). It goes through the coil and out 
+   to A2, then to Neutral (N).
+8. The coil becomes an electromagnet.
+
+4. THE MAGIC LINK (HOW THE TWO PAGES CONNECT)
+--------------------------------------------------------------------------------
+This is the most crucial part:
+When the K1 coil on Page 5 becomes a magnet, it physically pulls down the K1 
+main contacts on Page 4.
+
+9. The 400V current on Page 4 can now flow through K1, through the OLR, and 
+   into the motor. The motor starts spinning.
+10. Simultaneously, the magnet in K1 also pulls down the K1 auxiliary contact 
+    (13-14) on Page 5.
+11. The human lets go of the START button (it opens). BUT, the current on Page 
+    5 now has a new path: it flows through the closed K1 13-14 contact, 
+    bypassing the START button, and keeps the K1 coil energized.
+12. The motor keeps running forever, until the STOP button is pressed (which 
+    breaks the control circuit on Page 5, dropping the coil, which drops the 
+    main contacts on Page 4, killing the motor).
+
+5. SUMMARY
+--------------------------------------------------------------------------------
+- Page 4 is a 3-phase 400V highway. K1 is the toll booth.
+- Page 5 is a 1-phase low-voltage control panel. The K1 coil is the button 
+  that opens the toll booth.
+- They are physically wired completely separately, but mechanically linked 
+  by the contactor's electromagnet.
+================================================================================
+END OF NOTES
