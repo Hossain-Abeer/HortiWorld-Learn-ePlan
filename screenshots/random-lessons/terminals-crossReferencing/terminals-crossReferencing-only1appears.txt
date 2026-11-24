@@ -1,0 +1,76 @@
+```txt
+================================================================================
+NOTES — TERMINALS VS. INTERRUPTION POINTS & CROSS-REFERENCE LOGIC
+File     : gpt/notes/learnEplan-gpt-terminal-vs-interruption-point.txt
+Section  : Troubleshooting (Cross-References)
+Date     : 2026-11-24
+================================================================================
+
+1. THE DIFFERENCE IN THE PROPERTIES PANEL
+--------------------------------------------------------------------------------
+Your observation is correct. You used two different types of symbols, which 
+is why the properties panel looks different.
+
+- Page 2 and Page 4 (Terminals): You used a "Terminal" symbol from the 
+  library. You can see the Full DT is =CA1+EAA-R-R1. This means it represents 
+  a physical terminal block (e.g., Terminal 1 on the R phase). Because it is a 
+  physical device, EPLAN categorizes it as a "Terminal" with connection 
+  points.
+- Page 5 (Interruption Point): You used an "Interruption point" symbol. The 
+  Full DT is =CA1+EAA-R. It is a purely logical symbol. It tells EPLAN "this 
+  wire continues to another page" without representing a physical terminal 
+  block. 
+
+In the tutorial, the creator likely used terminals on Page 2 and 4 because 
+power physically enters and exits the cabinet through terminal blocks. On 
+Page 5, they just wanted to show the potential continuing to another sheet, 
+so an interruption point is sufficient.
+
+2. THE TUTORIAL'S ACTION: CROSS-REFERENCE FUNCTION > FORWARD
+--------------------------------------------------------------------------------
+When the tutorial right-clicked the end point of the terminal on Page 4 and 
+chose "Cross-reference function > forward", they were manually telling EPLAN:
+"This terminal is the start of a wire, point the arrow forward to show 
+where it goes next."
+
+By default, EPLAN might just draw a terminal and leave the wire hanging. 
+Using the "Cross-reference function" tool forces EPLAN to look for another 
+terminal or interruption point with the exact same potential name (R) and 
+generate the jump-link (e.g., R/2.9). "Forward" dictates the direction of 
+the arrow and that this terminal is the "source" feeding the next page.
+
+3. COULD YOU DO IT FROM PAGE 2 INSTEAD OF CREATING A NEW ONE ON PAGE 4?
+--------------------------------------------------------------------------------
+Yes. Functionally, copying and pasting the terminal from Page 2 to Page 4 is 
+identical to creating a new one, as long as the Potential Name (R) and 
+Terminal Designation (R1) match.
+
+The reason the tutorial created a new one on Page 4 is purely for the sake of 
+demonstration. In real engineering, you would likely copy-paste the whole 
+power supply block from Page 2 to Page 4 to maintain visual consistency. As 
+long as they share the same Full DT (=CA1+EAA-R-R1), EPLAN treats them as two 
+representations of the exact same physical terminal.
+
+4. INTERPRETING THE CROSS-REFERENCE LIST
+--------------------------------------------------------------------------------
+Look at the table in your fourth screenshot. It shows three entries for the 
+name =CA1+EAA-R:
+- Placed at =CA1+EAA/2.9 (Page 2, Row 9)
+- Placed at =CA1+EAA/4.9 (Page 4, Row 9)
+- Placed at =CA1+EAA/5.0 (Page 5, Row 0)
+
+What this means:
+EPLAN has successfully recognized that the potential "R" exists on all three 
+pages. It has grouped them together. 
+
+Notice that the Name column says =CA1+EAA-R, NOT =CA1+EAA-R-R1. This means 
+EPLAN is tracking the POTENTIAL (the wire itself), not just the physical 
+terminal. Because Page 5 used an interruption point instead of a terminal, 
+EPLAN included it in the potential's cross-reference list, proving that the 
+logical link between the physical terminals (Pages 2 and 4) and the logical 
+interruption (Page 5) is successful. 
+
+You have successfully linked the power across the sheets.
+================================================================================
+END OF NOTES
+```

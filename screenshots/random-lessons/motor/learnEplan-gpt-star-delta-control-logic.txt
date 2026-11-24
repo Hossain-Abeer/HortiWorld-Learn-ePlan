@@ -1,0 +1,69 @@
+```txt
+================================================================================
+NOTES — STAR-DELTA CONTROL LOGIC & THE ROLE OF K1
+File     : gpt/notes/learnEplan-gpt-star-delta-control-logic.txt
+Section  : Concept Clarification (Motor Control)
+Date     : 2026-11-24
+================================================================================
+
+1. YOUR MENTAL MODEL IS ALMOST CORRECT
+--------------------------------------------------------------------------------
+You are 100% right: no human manually flips these switches. In industrial 
+panels, a PLC (or a timer relay) controls them using binary 24V DC signals. 
+The operator just presses a "Start" button.
+
+The confusion comes from thinking of K1, Star, and Delta as separate 
+"on/off" switches. They are not. They are **routing switches**. 
+
+Here are their exact roles:
+- **K1 (Main Contactor):** The Master Power Switch. If K1 is open, the motor 
+  is completely dead, regardless of what Star and Delta are doing.
+- **Star Contactor (K3):** The "Starting" router. It connects the ends of 
+  the motor coils together.
+- **Delta Contactor (K2):** The "Running" router. It connects the ends of 
+  the motor coils back to the main power.
+
+2. THE SEQUENCE OF OPERATION (WHAT THE PLC DOES)
+--------------------------------------------------------------------------------
+Here is the exact logic sequence that happens inside the PLC when an 
+operator presses "START":
+
+Step 1: PLC turns ON the Star contactor. (The motor coils are now configured 
+        in Star).
+Step 2: PLC turns ON the Main contactor (K1). 
+        *Result: The motor starts turning gently with low current.*
+Step 3: PLC starts a timer (e.g., 5 seconds). The motor accelerates.
+Step 4: Timer finishes. PLC turns OFF the Star contactor.
+Step 5: PLC turns ON the Delta contactor.
+        *Result: The motor switches to full power and runs normally.*
+
+3. WHY DO WE NEED K1 IF WE HAVE STAR AND DELTA?
+--------------------------------------------------------------------------------
+Look at your schematic. The power comes in from the top (R, Y, B) and goes 
+through K1 first. 
+
+- The Star and Delta contactors are placed *downstream* of K1. They only 
+  route the power between the motor's 6 terminals. 
+- **K1 is the safety gate.** If the OLR (overload relay) detects a jammed 
+  motor, it sends a signal to the PLC, which instantly drops K1. This kills 
+  power to the entire motor.
+- Furthermore, K1 provides a physical break between the 400V grid and the 
+  motor. If you only used Star and Delta to turn the motor on and off, you 
+  would be switching high voltage directly at the motor windings, which is 
+  bad practice and creates massive electrical arcing.
+
+4. THE CATASTROPHE PREVENTED BY THE PLC (INTERLOCKING)
+--------------------------------------------------------------------------------
+If the PLC turns on Star and Delta at the exact same time, it connects R, Y, 
+and B directly together. This is a **dead short circuit** (400V phase-to-
+phase). It will explode the contactors.
+
+To prevent this, the PLC code has a "Dead Time" (usually 50 to 100 
+milliseconds) between turning off Star and turning on Delta. 
+Additionally, in the real world, panel builders install a physical 
+**Mechanical Interlock** (a plastic lever) between the Star and Delta 
+contactors so they physically cannot close at the same time, even if the 
+PLC makes a mistake.
+================================================================================
+END OF NOTES
+```

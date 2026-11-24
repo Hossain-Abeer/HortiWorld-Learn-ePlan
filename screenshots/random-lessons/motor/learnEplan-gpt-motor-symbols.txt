@@ -1,0 +1,63 @@
+================================================================================
+NOTES — UNDERSTANDING MOTOR SYMBOLS IN EPLAN
+File     : gpt/notes/learnEplan-gpt-motor-symbols.txt
+Section  : Concept Clarification (Insert Center)
+Date     : 2026-11-23
+================================================================================
+
+1. THE BREAKDOWN OF MOTOR TYPES
+--------------------------------------------------------------------------------
+The symbols in the library are categorized by **Connection Points (CP)** 
+and whether they explicitly draw the **Protective Earth (PE)** and the 
+internal **Windings**.
+
+- **Motor without PE and winding, 2 connection points:**
+  Represents a highly simplified DC motor (+, -) or a single-phase AC motor. 
+  It has no ground drawn and shows just a plain circle. Rarely used in 
+  modern industrial panels.
+
+- **Motor with PE, 3 connection points:**
+  Typically represents a single-phase AC motor (Live, Neutral, Earth). 
+  Alternatively, some libraries use this for a simplified 3-phase motor 
+  where the 3 phases connect, and the PE is visually implied or placed 
+  separately.
+
+- **Motor with PE, 4 connection points:**
+  **This is the standard 3-phase AC motor.** It has connections for U, V, 
+  W (the three phases) and a 4th connection at the bottom of the circle for 
+  PE. This is the one you will use 90% of the time at Hortiworld.
+
+- **Motor without PE, 4 connection points:**
+  A 3-phase motor, but the 4th connection is not Earth. It could represent 
+  a motor with a built-in thermal sensor (PTC), an electromagnetic brake, 
+  or a 4-wire configuration. PE must be connected externally.
+
+- **Motor, variable:**
+  A generic placeholder. You can double-click it and change the number of 
+  connection points to whatever you need. Useful for complex motors (like 
+  a 6-wire motor for Star-Delta starting, where you need U1,V1,W1 and 
+  U2,V2,W2).
+
+--------------------------------------------------------------------------------
+2. THE ROLE OF "WINDING" IN THE SYMBOL
+--------------------------------------------------------------------------------
+Some symbols show zig-zag lines or loops inside the circle. This represents 
+the actual physical copper windings of the motor. 
+- A plain circle (without winding) is the most common IEC standard for a 
+  generalized motor.
+- A circle with windings is used in specific textbooks or older standards 
+  to emphasize the internal electrical structure.
+
+--------------------------------------------------------------------------------
+3. WHICH ONE TO USE? (Rule of Thumb)
+--------------------------------------------------------------------------------
+- For a standard 3-phase conveyor motor or pump motor: Use **Motor with 
+  PE, 4 connection points**. 
+- For a Star-Delta starter (where 6 wires go to the motor): Use **Motor, 
+  variable** and set it to 6 connection points (or search for a dedicated 
+  Star-Delta motor symbol).
+- Remember: The motor symbol's connection numbers (1, 2, 3, 4) don't 
+  inherently mean U, V, W. You map the phase wires to the pins inside the 
+  symbol's properties.
+================================================================================
+END OF NOTES

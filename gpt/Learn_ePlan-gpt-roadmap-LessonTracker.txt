@@ -57,7 +57,7 @@ Not target:
 SECTION 0 — SETUP & ORIENTATION (Day 1, ~2 h)
 ================================================================================
 
-[ ] 0.1  INSTALL & LAUNCH EPLAN EDUCATION
+[x] 0.1  INSTALL & LAUNCH EPLAN EDUCATION
     Type: exercise
     Objective: working install, correct license, project wizard reachable.
     Action: verify Education edition launches; note version (v2022/v2023/v2024);
@@ -68,7 +68,7 @@ SECTION 0 — SETUP & ORIENTATION (Day 1, ~2 h)
     Debug:  license error -> re-activate via EPLAN License Client; don't
             proceed until resolved.
 
-[ ] 0.2  RIBBON TOUR (recognition only)
+[x] 0.2  RIBBON TOUR (recognition only)
     Type: lesson + self-check
     Objective: name all tabs and what they are for.
     Feature: Ribbon tabs — Start, Project, Page, Devices, Insert, Edit,
@@ -79,7 +79,7 @@ SECTION 0 — SETUP & ORIENTATION (Day 1, ~2 h)
     Verify: all 10 named with a plausible button; 8+ correct.
     Debug:  confusing two tabs -> note it; do not dwell.
 
-[ ] 0.3  WINDOW PANES ORIENTATION
+[x] 0.3  WINDOW PANES ORIENTATION
     Type: lesson + self-check
     Feature: Page Navigator, Device Navigator, Graphic Editor, Messages,
              Layers, Properties.

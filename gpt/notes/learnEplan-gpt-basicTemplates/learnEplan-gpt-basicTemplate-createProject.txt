@@ -1,0 +1,83 @@
+================================================================================
+NOTES — EPLAN PROJECT PROPERTIES & TEMPLATE INHERITANCE
+File     : gpt/notes/learnEplan-gpt-basicTemplate-createProject.txt
+Section  : 0.1 / 1.1 (Setup & Project Creation)
+Date     : 2026-11-20
+Screenshots: screenshots/basic_template/createProject/
+================================================================================
+
+When you create a project from a template (IEC_bas001.zw9), EPLAN copies
+not just the pages, but all the project-level settings. The "Project
+Properties" dialog (File > Properties) is the control center for this.
+Here is what the four tabs mean:
+
+--------------------------------------------------------------------------------
+1. PROPERTIES TAB (Metadata & Defaults)
+--------------------------------------------------------------------------------
+- Project description: Inherited from the template ("Basic project...").
+- Job number / Commission: Where you link this to a customer job (e.g.,
+  "Hortiworld").
+- Company info: Inherited from EPLAN GmbH. You will overwrite this with
+  your own company details later.
+- Thermal design: Voltage (230V) and Frequency (50Hz). The template
+  defaults to European standards.
+- Block properties: Formatting rules for interruption points and
+  cross-references.
+
+What you must know: This tab feeds the title block (plot frame) on every
+page. If you change "Company name" here, it updates the bottom-right
+corner of your schematics automatically.
+
+--------------------------------------------------------------------------------
+2. STATUS TAB (Health Checks)
+--------------------------------------------------------------------------------
+- A list of project checks: Terminals, Plugs, Cables, PLC/bus,
+  Connections, Cross-references, etc.
+- Currently, all columns are empty (no errors).
+- When you start drawing, EPLAN runs these checks in the background (or
+  when you press F5). If you have a broken wire, an unconnected terminal,
+  or a missing PLC address, the error count will show up here.
+
+What you must know: This is your debugging dashboard. If a colleague says
+"run a project check," they mean open this tab and see what's broken.
+
+--------------------------------------------------------------------------------
+3. STRUCTURE TAB (The IEC 81346 Engine)
+--------------------------------------------------------------------------------
+- "Extended reference identification" is checked.
+- Everything (Pages, General devices, Terminal strips, PLCs, Cables) is
+  set to "Function designation and location designation".
+- This is exactly why your devices will look like =GH1+CP1-K1.
+- = is the location designation (GH1).
+- + is the function designation (CP1).
+- The template enforces this syntax. You cannot accidentally tag a
+  contactor without telling EPLAN what page/panel it lives in.
+
+What you must know: This tab proves the template is doing the heavy
+lifting for IEC 81346 tagging. You will not set this manually.
+
+--------------------------------------------------------------------------------
+4. STATISTICS TAB (Page & Layout Space Overview)
+--------------------------------------------------------------------------------
+- Page types and quantities.
+- Right now: 1 page (Title page/cover sheet), 0 Schematic pages.
+- Total number of pages: 1.
+- Frozen pages: 1 (the title page).
+- Layout spaces: 0 (Pro Panel/3D, which you are ignoring this week).
+
+What you must know: EPLAN Education has a 40-page limit. You must keep
+an eye on this tab. A standard DOL motor starter panel usually takes 3 to
+5 schematic pages. You are well within the limit.
+
+--------------------------------------------------------------------------------
+KEY TAKEAWAYS
+--------------------------------------------------------------------------------
+- Project Properties is the single source of truth for title blocks and
+  identifier rules.
+- The Structure tab confirms you are using IEC 81346 (=+ -) formatting.
+- The Status tab is your error dashboard; it should be your first stop
+  when troubleshooting.
+- Statistics tab ensures you don't hit the 40-page Education limit.
+================================================================================
+END OF NOTES
+================================================================================

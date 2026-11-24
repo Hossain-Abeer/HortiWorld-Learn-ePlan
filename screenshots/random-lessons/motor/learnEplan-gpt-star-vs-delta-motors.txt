@@ -1,0 +1,77 @@
+================================================================================
+NOTES — STAR VS. DELTA VS. STAR-DELTA "MOTORS"
+File     : gpt/notes/learnEplan-gpt-star-vs-delta-motors.txt
+Section  : Concept Clarification (Motor Basics)
+Date     : 2026-11-24
+================================================================================
+
+1. THE BIG MISCONCEPTION
+--------------------------------------------------------------------------------
+There is no such thing as a "Star motor" or a "Delta motor". A standard 
+3-phase AC induction motor is physically identical regardless of how it is 
+wired. 
+
+When engineers say "Star" or "Delta," they are referring to **how the 6 
+wires in the motor's terminal box are connected to each other and to the 
+power supply.** The motor itself has 3 separate coils (windings). 
+
+2. THE TERMINAL BOX (The 6 Wires)
+--------------------------------------------------------------------------------
+A motor that can do both has 6 terminals in its junction box:
+- U1, V1, W1 (the beginnings of the 3 coils)
+- U2, V2, W2 (the ends of the 3 coils)
+
+Depending on how you place the metal shorting links in the terminal box, you 
+create either a Star or Delta connection.
+
+3. THE THREE CONFIGURATIONS EXPLAINED
+--------------------------------------------------------------------------------
+
+A) DELTA (Δ) - The Standard Running Mode
+   - How it's wired: U2 connects to V1, V2 connects to W1, W2 connects to U1. 
+     (Drawing a triangle).
+   - Voltage across coil: Full line voltage (e.g., 400V).
+   - Result: The motor draws full current and produces **full torque**. 
+   - Use case: This is how the motor runs 90% of the time during normal 
+     operation.
+
+B) STAR (Y) - The Starting Mode (or High-Voltage Mode)
+   - How it's wired: U2, V2, and W2 are all tied together in the center. 
+     U1, V1, W1 connect to the three power phases. (Drawing a Y).
+   - Voltage across coil: Reduced voltage (Line voltage / √3). So, 400V 
+     becomes 230V per coil.
+   - Result: The motor draws only 1/3 of the current and produces only 1/3 
+     of the torque.
+   - Use case: Used briefly during startup to prevent a massive power spike, 
+     OR used permanently if the motor is rated for a higher voltage (e.g., a 
+     400V/690V motor wired in Star on a 690V grid).
+
+C) STAR-DELTA (Y-Δ) - The Starting System
+   - This isn't a motor type; it's a *system* (the schematic you just drew). 
+   - You use a special motor with 6 wires brought out to the panel.
+   - You use contactors to physically change the wiring from Star to Delta 
+     while the motor is running.
+   - Starts in Star (low current), runs in Delta (full power).
+
+4. HOW TO READ A MOTOR NAMEPLATE
+--------------------------------------------------------------------------------
+Look at the voltage rating on a motor. It usually looks like this:
+- **230V Δ / 400V Y** (Older European standard)
+- **400V Δ / 690V Y** (Modern European standard)
+
+What this means:
+- If your grid is 400V, and you use a Star-Delta starter, you wire it in 
+  Delta for normal running. During startup, you wire it in Star, which drops 
+  the voltage across the coils from 400V down to 230V (safe for starting).
+- If you only have a Direct-On-Line (DOL) starter, you just use metal links 
+  to wire it permanently in Delta. 
+
+5. SUMMARY
+--------------------------------------------------------------------------------
+- Same physical motor.
+- Delta = Full power, high startup current (Running mode).
+- Star = Low power, low startup current (Starting mode).
+- Star-Delta = Using a panel with contactors to automatically switch from 
+  Star to Delta as the motor spins up. 
+================================================================================
+END OF NOTES

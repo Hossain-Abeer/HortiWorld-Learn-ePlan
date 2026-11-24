@@ -1,0 +1,64 @@
+================================================================================
+NOTES — MOTOR PE CONNECTIONS & SAFETY GROUNDING
+File     : gpt/notes/learnEplan-gpt-motor-pe-connection.txt
+Section  : Concept Clarification (Motor Circuit)
+Date     : 2026-11-23
+================================================================================
+
+1. THE DIFFERENCE BETWEEN THE TWO IMAGES
+--------------------------------------------------------------------------------
+Electrically: There is ZERO difference.
+Visually: The difference is purely which pin connection point the PE wire is 
+attached to on the motor symbol.
+- Image 1: The PE wire is connected to a pin on the *right side* of the 
+  motor circle.
+- Image 2: The PE wire is connected to a pin at the *bottom* of the motor 
+  circle.
+
+EPLAN uses different symbol variants for the same physical device. Image 2 
+(PE at the bottom) is the standard IEC convention. It looks cleaner and 
+prevents the wire from crossing the 3-phase lines. The YouTuber likely 
+swapped the symbol variant or moved the connection point in the symbol 
+properties.
+
+(Note: The blue wire coming in from the top left is labeled "PB" in the 
+tutorial. This is almost certainly a typo by the creator. It should be "PE". 
+Standard IEC colors: R=Black/Grey, Y=Black/Grey, B=Black/Grey, N=Blue, 
+PE=Green/Yellow).
+
+2. WHY IS THE EARTH WIRE CONNECTED?
+--------------------------------------------------------------------------------
+Safety. The PE (Protective Earth) wire is connected to the metal chassis 
+(or stator housing) of the motor. 
+
+If the internal insulation of the motor fails, a live phase wire (R, Y, or 
+B) could touch the metal casing. Without PE, the casing becomes "live" 
+(400V/230V). If a worker touches it, the current flows through their body 
+to the ground, causing severe shock or death.
+
+With PE connected, the fault current flows straight to earth. This creates 
+a massive current spike (a short circuit) that instantly trips the MCB 
+(Circuit Breaker) or blows the fuse, shutting off power safely before 
+anyone gets hurt.
+
+3. WHAT WOULD HAPPEN IF THE OTHER WAS CONNECTED?
+--------------------------------------------------------------------------------
+There are two interpretations of your question:
+
+A) What if you swapped the pin connections (e.g., connected Phase R to 
+   the PE pin, and PE to the Phase pin)?
+   Result: The moment you turn on the power, Phase R goes directly to Earth. 
+   This is a dead short circuit to ground. The MCB will trip instantly (or 
+   blow up if it's a cheap breaker).
+
+B) What if you used the symbol from Image 1 instead of Image 2?
+   Result: Electrically nothing changes. The motor still operates, and the 
+   casing is still grounded. However, visually, the wire might overlap with 
+   other lines or look messy. It is purely an aesthetic choice in EPLAN.
+
+RULE OF THUMB: 
+Always connect PE to the motor casing. In standard European schematics, 
+PE is drawn at the bottom. Also, PE must NEVER be switched by a contactor 
+or breaker. It goes straight from the terminal block to the motor.
+================================================================================
+END OF NOTES

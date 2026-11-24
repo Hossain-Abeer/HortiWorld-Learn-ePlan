@@ -1,0 +1,67 @@
+================================================================================
+EPLAN LESSON TRACKER — SECTION 0.2 (CORRECTED FOR EPLAN 2027)
+Topic    : Ribbon Tour (Recognition only)
+Type     : lesson + self-check
+Objective: Name all tabs and what they are for.
+================================================================================
+
+Thank you for the screenshot. I stand corrected. You are using EPLAN 
+Education Version 2027, which has a modernized ribbon layout compared 
+to the older versions. We must use the tabs actually on your screen.
+
+Here are the actual tabs in your EPLAN 2027 interface (from left to right),
+and what they are for:
+
+1. File (Green Tab)
+   Purpose: Backstage view. Project creation, opening, saving, printing, 
+   exporting (like PDF), and global settings.
+   
+2. Home
+   Purpose: The primary editing workspace. Clipboard (Paste), Page 
+   Navigator, Text insertion, Properties, Find/Replace, and Graphical 
+   preview.
+   
+3. Devices
+   Purpose: Placing and managing devices. Inserting symbols, PLC boxes, 
+   terminals, and managing the Device Navigator.
+   
+4. Connections
+   Purpose: Everything related to wires. Connection numbering, cables, 
+   potential trackers, and wire routing.
+   
+5. Tools
+   Purpose: Data processing and verification. Project checks (errors), 
+   generating reports (BOM, terminal diagrams), and macros.
+   
+6. Pre-planning
+   Purpose: For P&ID-style high-level design before schematic creation. 
+   (IGNORE this week).
+   
+7. Master data
+   Purpose: Managing the behind-the-scenes libraries. Symbol libraries, 
+   title blocks (plot frames), forms, and the EPLAN Data Portal (parts).
+   
+8. EPLAN Cloud
+   Purpose: Cloud integration. EPLAN eVIEW, cloud projects, and online 
+   collaboration. (IGNORE this week).
+   
+9. Find command (Search Bar)
+   Purpose: Not a tab, but the search bar where you can type "Terminal" 
+   or "Print" and EPLAN will find the button for you regardless of tab.
+
+================================================================================
+YOUR SELF-CHECK / EVIDENCE
+================================================================================
+Click through each of the 8 actual tabs on your screen. Find ONE button 
+under each tab that makes sense for that category. (You can use the 
+screenshot you provided to see some of them).
+
+Send back your list of the 8 tabs, each with 1 button you found.
+(Example format:
+  Home -> Find
+  Devices -> ...
+  Tools -> ...
+  ...)
+
+Let me know when you are ready to submit your evidence for verification.
+================================================================================

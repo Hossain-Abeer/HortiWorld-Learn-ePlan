@@ -1,0 +1,57 @@
+================================================================================
+NOTES — CIRCUIT BREAKER SYMBOLS: FA4 VS. FAH4 & AUXILIARY CONTACTS
+File     : gpt/notes/learnEplan-gpt-circuitbreaker-fa4-fah4.txt
+Section  : Concept Clarification (Insert Center)
+Date     : 2026-11-23
+================================================================================
+
+1. THE SHORT ANSWER
+--------------------------------------------------------------------------------
+- **FA4** (Symbol No. 1195) is a standard 4-pole circuit breaker. It only 
+  contains the main power contacts (the 4 poles that carry the load current).
+- **FAH4** is a 4-pole circuit breaker **with an auxiliary contact**. The "H" 
+  stands for "Hilfskontakt" (German for auxiliary contact). It includes the 4 
+  main power poles PLUS an additional, smaller contact used for signaling or 
+  control logic.
+
+--------------------------------------------------------------------------------
+2. WHAT IS AN AUXILIARY CONTACT?
+--------------------------------------------------------------------------------
+An auxiliary contact is a small switch built into the breaker that is 
+mechanically linked to the main breaker mechanism. It does NOT carry the main 
+load current. 
+
+According to IEC 60050, it is "a contact included in an auxiliary circuit, 
+mechanically operated by the circuit-breaker... e.g. for indicating the 
+position of the contacts." (Electropedia, IEV 442-05-30) [reference:0]
+
+In plain engineering terms:
+- When the main breaker trips (opens), the auxiliary contact also changes 
+  state (e.g., from Normally Closed to Normally Open).
+- This allows you to connect a signal lamp, a PLC input, or a monitoring 
+  relay to know exactly whether the breaker is ON or OFF (or TRIPPED).
+
+--------------------------------------------------------------------------------
+3. WHEN TO USE WHICH?
+--------------------------------------------------------------------------------
+- **Use FA4** when you just need to protect a circuit and don't care about 
+  feeding its status back to a controller or indicator. This is the standard 
+  choice for most simple power distribution.
+- **Use FAH4** when you need the PLC (or a control panel lamp) to know if the 
+  breaker has tripped. For example, if a motor breaker trips, you want to stop 
+  the PLC logic and light up a "FAULT" lamp. The auxiliary contact is what 
+  gives the PLC that signal.
+
+--------------------------------------------------------------------------------
+4. SYMBOL LIBRARY REFERENCE
+--------------------------------------------------------------------------------
+In the IEC_symbol library:
+- FA4 is found under: `IEC_Symbol → Beveiligingsschakelaar → 
+  Beveiligingsschakelaar, 8 aansluitingen` (Protection switch, 8 connections) 
+  [reference:1]. It has 8 connection points (2 per pole for the 4 poles).
+- FAH4 will have additional connection points for the auxiliary contact 
+  (often 2 more pins for the NO/NC aux contact). The exact symbol number may 
+  vary, but the "H" suffix is the visual indicator in the library.
+================================================================================
+END OF NOTES
+================================================================================

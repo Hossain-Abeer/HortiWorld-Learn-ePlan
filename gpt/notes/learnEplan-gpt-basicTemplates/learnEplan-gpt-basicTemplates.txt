@@ -1,0 +1,135 @@
+================================================================================
+NOTES — EPLAN BASIC TEMPLATES
+File     : gpt/notes/01.1-eplan-basic-templates.txt
+Section  : 1.1 (Project Creation & Structure)
+Author   : [your name]
+Date     : 2026-11-20
+Source   : EPLAN Education install directory + official EPLAN help[reference:0]
+================================================================================
+
+1. WHAT A TEMPLATE IS
+--------------------------------------------------------------------------------
+An EPLAN template is a pre-built project skeleton. When you create a new
+project from it, EPLAN copies everything: page structure, project settings,
+symbol libraries, forms, plot frames (title blocks), and any sample pages.
+You do not start from an empty page — you start from a house style.[reference:1]
+
+This is fundamentally different from KiCAD, where you start with an empty
+sheet and pick a worksheet file. In EPLAN, the template determines the
+identifier structure (=location+function), the page hierarchy, and the
+symbol library your project will use.
+
+--------------------------------------------------------------------------------
+2. THE .ZW9 FORMAT (BASIC PROJECT)
+--------------------------------------------------------------------------------
+In modern EPLAN (v2.9+), templates are .zw9 files — "basic projects."
+
+A .zw9 contains:
+  - All project settings (page structure schemes, device structure schemes)
+  - All pages (including empty starter pages)
+  - Master data (symbol libraries, forms, plot frames)
+  - Stored external documents and image files (if any)[reference:2]
+
+Older EPLAN used .ept (project template) and .epb (basic template).
+These are legacy. The current format is .zw9. If you see .ept, ignore it.[reference:3]
+
+Why it matters for you:
+  A .zw9 is not just a "theme." It is a complete project. When you open
+  IEC_bas001.zw9, you are opening a project that already has pages, a
+  title block, and a symbol library attached. You then save it under a
+  new name — that is your project.
+
+--------------------------------------------------------------------------------
+3. THE FILES IN YOUR TEMPLATE FOLDER
+--------------------------------------------------------------------------------
+Your folder: D:\Users\Public\Eplan\Data\Templates\HortiWorld\
+
+Key files and what they are:
+
+  IEC_bas001.zw9          IEC identifier structure pre-defined.
+                          Contains symbol libraries, forms, plot frame.
+                          Pages grouped by type into subfolders.[reference:4]
+                          → The standard baseline for IEC projects.
+
+  IEC_bas003.zw9          Same as bas001, plus document-type in the page
+                          structure (e.g. "schematic", "terminal diagram"
+                          as separate hierarchy levels).[reference:5]
+                          → More structure. Overkill for a DOL starter.
+
+  IEC_bas003_sample      A fully worked example project. Not a template.
+  _project.zw9           Open it to see what a finished IEC project looks
+                          like. Useful for reference, not for starting.
+
+  IEC_Tutorial.zw9       EPLAN's own tutorial project. Guided learning
+                          material. Safe to explore.
+
+  NFPA_mm_bas001.zw9     North American NFPA standard (inches). Not for
+                          European / IEC work.
+
+  GB_bas001.zw9          Chinese GB standard. Not relevant here.
+
+  FL_bas001.zw9          EPLAN Fluid (hydraulics/pneumatics). Ignore.
+
+  Preplanning_bas*.zw9   For pre-planning phase (P&ID-style). Ignore for
+                          panel design.
+
+  *.Tools.xml            Parts/tools databases. Not templates.
+
+  *.xlsx                 External editing templates (terminal diagrams,
+                          labeling, etc.). Not templates.
+
+--------------------------------------------------------------------------------
+4. WHICH ONE TO USE (AND WHY)
+--------------------------------------------------------------------------------
+For the DOL starter dummy project:  IEC_bas001.zw9.
+
+Reason:
+  - It uses the IEC identifier structure (=Location+Function-Product).
+    This is exactly the 81346 tagging system you will use at Hortiworld.
+  - It includes the IEC symbol library, which has contactors, motor
+    protection, terminals, PLC boxes, and potential trackers.
+  - It gives you a page hierarchy with = and + structure identifiers
+    already configured.[reference:6][reference:7]
+  - It is simple enough to navigate. bas003 adds document-type layers
+    that you do not need for a single-panel DOL.
+
+What you get for free when you pick IEC_bas001:
+  - Title block (plot frame) already attached to every page
+  - Symbol library: IEC_symbol (the one you will use for everything)
+  - Page structure: = (higher-level function) + (location)
+  - Project settings: connection numbering, cross-reference display,
+    device tag format — all pre-configured to IEC defaults.
+
+You do NOT need to configure any of this manually. The template does it.
+
+--------------------------------------------------------------------------------
+5. WHAT HAPPENS WHEN YOU CREATE THE PROJECT
+--------------------------------------------------------------------------------
+EPLAN copies IEC_bas001.zw9 into your chosen storage location and
+renames it to your project name. Your original .zw9 remains untouched
+in the Templates folder.
+
+Result:
+  D:\DevJobs\HortiWorld\HortiWorld-Learn-ePlan\
+  └── dummy-project1\
+      ├── dummy-project1.elk        ← the live project file
+      ├── ... (supporting folders)  ← pages, master data, etc.
+
+The .elk is your working file. It is what EPLAN opens. It is NOT portable
+to commercial EPLAN if it was created in Education — another reason we
+commit PDF exports, not .elk files.
+
+--------------------------------------------------------------------------------
+6. KEY TAKEAWAYS
+--------------------------------------------------------------------------------
+- .zw9 = basic project = template + full project skeleton. Not a theme.
+- IEC_bas001 = your baseline. It carries the IEC symbol library, forms,
+  and the =+ - identifier structure.
+- The template pre-configures your tagging system. You do not set up
+  81346 manually; you inherit it.
+- Education-created .elk files are non-portable. PDF exports are the
+  portfolio artifact.
+- Ignore .ept, .epb, NFPA, GB, FL, Preplanning for now.
+================================================================================
+END OF NOTES
+================================================================================

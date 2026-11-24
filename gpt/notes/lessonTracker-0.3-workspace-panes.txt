@@ -1,0 +1,23 @@
+================================================================================
+EPLAN LESSON TRACKER — SECTION 0.3 EVIDENCE
+Filename  : lessontracker-0.3-workspace-panes.txt
+Screenshot: screenshots/lessontracker-0.3-workspace-panes.png
+================================================================================
+
+Screenshot Interpretation:
+1. The splash screen is successfully gone. The Graphic Editor (center) is now 
+   displaying the "Title page / cover sheet" of your dummy project.
+2. The Page Navigator (left) is fully populated. You can see the basic 
+   template's default structure (e.g., =AA1 Title page, =A1 Enclosure 1, 
+   =B1 Station "Feed"). You can also see the different tabs at the top of 
+   the left pane: "Pages" is active, and "Devices" is right next to it.
+3. The right pane is currently showing the "Insert center (IEC)" instead of 
+   Properties. This is fine for now; you can use it to drag and drop symbols 
+   later.
+4. The status bar at the bottom shows "Grid: 4.00 mm", which is standard for 
+   IEC schematic drawing in Europe.
+
+Verification: PASSED. You have successfully opened the graphic editor and 
+navigated the page structure.
+
+[0.3] is now ticked off.

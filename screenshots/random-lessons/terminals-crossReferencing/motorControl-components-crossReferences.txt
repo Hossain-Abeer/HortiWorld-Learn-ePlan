@@ -1,0 +1,67 @@
+```txt
+================================================================================
+NOTES — STAR-DELTA CONTROL CIRCUIT & CROSS-REFERENCES
+File     : gpt/notes/learnEplan-gpt-star-delta-control-circuit.txt
+Section  : Concept Clarification (Control Logic & Cross-References)
+Date     : 2026-11-24
+================================================================================
+
+1. YOUR CATCH ON "STAR" VS "START"
+--------------------------------------------------------------------------------
+You are absolutely correct. The tutorial almost certainly had a typo or a 
+misleading label by writing "START" for the NC contact. 
+You named it "STAR" (indicating the NC contact of the Star contactor). This is 
+the correct engineering practice. The NC contact of the Star contactor is used 
+to interlock the Delta contactor, ensuring they never close at the same time.
+
+2. HOW K1 APPEARS IN BOTH PAGES & INTERLINKING
+--------------------------------------------------------------------------------
+In EPLAN, a "Device" is a logical concept, not a graphical one. 
+- K1 is a single device (a contactor).
+- On Page 4 (Power circuit), K1 is represented by its main power contacts 
+  (poles 1-2, 3-4, 5-6).
+- On Page 5 (Control circuit), K1 is represented by its coil (A1-A2) and its 
+  auxiliary NO contact (13-14).
+Because you gave them all the exact same Device Tag (-K1), EPLAN links them. 
+They are physically different drawings, but logically the exact same component.
+The Device Overview (the list of pins at the bottom right of Page 5) shows 
+this: pins 1-2, 3-4, 5-6 are marked /4.1 (Page 4, column 1) and pin 13-14 is 
+marked /5.3 (Page 5, column 3).
+
+3. THE CONTROL CIRCUIT NETWORK (HOW IT OPERATES)
+--------------------------------------------------------------------------------
+Look at the circuit on Page 5:
+- Power flows from R through OLR (Overload NC contact) and STOP (NC button).
+- Pressing START (NO) energizes the K1 coil.
+- K1's NO contact (13-14) bypasses the START button (the "seal-in" circuit). 
+  The coil stays energized even after you release the button.
+- Below the seal-in, the circuit splits into two parallel paths:
+  Path A (Star): Power flows through the NC contact of DELTA (labeled "DELTA" 
+  in your drawing) to energize the STAR coil.
+  Path B (Delta): Power flows through the NC contact of STAR (the one you 
+  corrected) to energize the DELTA coil.
+
+4. THE INTERLOCKING MECHANISM
+--------------------------------------------------------------------------------
+Notice the NC contacts labeled "STAR" and "DELTA" in the control circuit. 
+These are electrical interlocks.
+- If the STAR coil is energized, its NC contact opens. This cuts power to the 
+  DELTA coil. Delta cannot turn on while Star is running.
+- If the DELTA coil is energized, its NC contact opens. This cuts power to the 
+  STAR coil.
+This guarantees that even if the PLC makes a software error and tries to turn 
+on both, the hardware itself will prevent it (dead short prevention).
+
+5. THE STARTUP SEQUENCE (What the PLC does)
+--------------------------------------------------------------------------------
+1. PLC sends a signal to START. K1 coil energizes. Main contactor K1 closes.
+2. Because DELTA is off, its NC contact is closed. Power flows to the STAR coil.
+3. Motor starts in Star (low current).
+4. A timer in the PLC waits 5 seconds.
+5. PLC breaks the signal to the STAR coil. Star contactor opens.
+6. STAR's NC contact closes.
+7. Power now flows to the DELTA coil. Delta contactor closes.
+8. Motor runs in Delta (full power).
+================================================================================
+END OF NOTES
+```

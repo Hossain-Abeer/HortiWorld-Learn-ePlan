@@ -1,0 +1,62 @@
+================================================================================
+NOTES — CONTACT TYPES & WHY SWITCHING AFTER A BREAKER
+File     : gpt/notes/learnEplan-gpt-contact-types-and-switching.txt
+Section  : Concept Clarification (Insert Center & Schematics)
+Date     : 2026-11-23
+================================================================================
+
+1. THE TYPES OF CONTACTS EXPLAINED
+--------------------------------------------------------------------------------
+- COIL: The actuator. It's an electromagnet. When you apply voltage to the 
+  coil (usually A1/A2), it creates a magnetic field that physically pulls 
+  the contacts closed or open.
+- NO CONTACT (Normally Open): A switch that is OPEN by default. It only 
+  allows current to flow when the coil is energized or the button is pushed. 
+  (Used for "Start" buttons or turning loads on).
+- NC CONTACT (Normally Closed): A switch that is CLOSED by default. It 
+  allows current to flow until it is actuated, at which point it OPENS and 
+  breaks the circuit. (Used for "Stop" buttons, E-stops, or overloads).
+- CHANGE-OVER CONTACT: A combination of NO and NC. It has 3 connections 
+  (Common, NO, NC). When actuated, it switches the common connection from 
+  one path to the other (like a 3-way switch or SPDT).
+
+--------------------------------------------------------------------------------
+2. A NOTE ON YOUR SCREENSHOT (DOUBLE VS. TRIPLE)
+--------------------------------------------------------------------------------
+In Image 2, you highlighted "Double NO contact" (4 connection points). 
+However, in Image 3, the drawing clearly shows a **3-pole (Triple) NO contact** 
+(with 6 connection points, one for each phase). It seems you placed a 3-pole 
+symbol to match the 3-phase power (R, Y, B). The dashed line connecting them 
+means they are mechanically linked (when one closes, all three close).
+
+--------------------------------------------------------------------------------
+3. WHY PUT A NO CONTACT AFTER A CIRCUIT BREAKER?
+--------------------------------------------------------------------------------
+Looking at Image 3: 
+Incoming Power (R, Y, B) -> MCB (Breaker) -> -Q2 (3-Pole NO Contact) -> Load
+
+You asked: *If there's a circuit breaker already, what's the function of the 
+NO contact?*
+
+They serve two completely different purposes:
+1. PROTECTION (The MCB): A Miniature Circuit Breaker is a safety device. It 
+   is designed to trip ONLY during an overload or a short circuit. You do 
+   not (and should not) use an MCB to turn a motor on and off every day. They 
+   wear out quickly if used as switches.
+2. CONTROL (The NO Contact): The NO contact (likely a Contactor, though here 
+   tagged `-Q2`) is the operational switch. It is controlled by the PLC or 
+   a pushbutton. It turns the power to the load ON and OFF during normal 
+   operation. 
+
+SEQUENCE OF POWER:
+The power flows through the MCB first for safety. Then it goes to the NO 
+contact, which acts as the "valve" to turn the motor on or off. You want 
+the protection *before* the control.
+
+(Also, notice how Phase N and PE do NOT go through the NO contact in Image 3. 
+In a standard 3-phase motor, you only switch the 3 live phases. N is usually 
+not needed for the motor itself, and PE must always be permanently connected 
+for safety, never switched).
+================================================================================
+END OF NOTES
+================================================================================

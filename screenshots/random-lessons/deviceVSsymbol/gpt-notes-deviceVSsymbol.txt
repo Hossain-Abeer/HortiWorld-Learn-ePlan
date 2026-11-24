@@ -1,0 +1,70 @@
+================================================================================
+NOTES — SYMBOLS VS. DEVICES IN EPLAN
+File     : gpt/notes/learnEplan-gpt-symbols-vs-devices.txt
+Section  : Concept Clarification (Insert Center)
+Date     : 2026-11-23
+================================================================================
+
+1. THE SHORT ANSWER
+--------------------------------------------------------------------------------
+- SYMBOLS are the pure graphics (blue line art) drawn on the page. They 
+  represent the electrical "function" (e.g., "a circuit breaker goes here").
+- DEVICES are the commercial, real-world components (e.g., a specific 
+  Siemens 3-pole 16A breaker). 
+
+A Device is built out of one or more Symbols and links them to a specific 
+Part Number in the database.
+
+--------------------------------------------------------------------------------
+2. WHAT EACH ONE DOES
+--------------------------------------------------------------------------------
+SYMBOLS (The Blue Line Art)
+- Found in the Symbol Library (IEC_symbol).
+- Has no manufacturer, no price, and no physical dimensions.
+- It only has connection points (pins) and a graphic.
+- If you insert a raw symbol, you just get a drawing with a device tag (like 
+  -Q1). You cannot generate a Bill of Materials (BOM) from it.
+
+DEVICES (The Real Components)
+- Found in the Devices/Insert Center (often linked to the EPLAN Data Portal).
+- Has a real Part Number (e.g., SIE.5SL4320-7RC).
+- Carries commercial data: manufacturer, price, weight, and technical specs.
+- Carries physical data: terminal layout, dimensions (crucial for cabinet 
+  layout / Pro Panel).
+- When you insert a Device, EPLAN places the correct graphical Symbol AND 
+  attaches the commercial Part to it simultaneously.
+
+--------------------------------------------------------------------------------
+3. MENTAL MODEL (Compared to KiCAD / PCB Design)
+--------------------------------------------------------------------------------
+- EPLAN SYMBOL = KiCAD Schematic Symbol (`.kicad_sym`). Just the logical 
+  drawing.
+- EPLAN DEVICE = KiCAD Component + Footprint Assignment. It ties the 
+  schematic drawing to a physical part in the BOM.
+
+The difference is that EPLAN centralizes this. In KiCAD, you place a symbol 
+and then use CvPcb to assign a footprint. In EPLAN, the "Device" master data 
+already contains both the schematic symbol AND the physical data.
+
+--------------------------------------------------------------------------------
+4. WHEN TO USE WHICH?
+--------------------------------------------------------------------------------
+USE SYMBOLS when:
+- You are doing a quick sketch or a rough draft and don't care about the 
+  manufacturer yet.
+- You need a custom graphical shape that doesn't exist in the standard 
+  device database.
+
+USE DEVICES when:
+- You are doing actual engineering for a real panel (like at Hortiworld).
+- You need to generate a BOM (Bill of Materials) or terminal diagrams.
+- You need to eventually route wires in a 3D cabinet (Pro Panel).
+- You want the software to auto-populate the technical specs (voltage, 
+  current rating) into your project.
+
+RULE OF THUMB: 
+Always use Devices for production projects. Use Symbols only for quick 
+placeholders or custom graphics.
+================================================================================
+END OF NOTES
+================================================================================
